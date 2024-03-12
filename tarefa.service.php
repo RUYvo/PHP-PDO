@@ -46,5 +46,30 @@ class TarefaService{
         $query = 'delete from tb_tarefas where id = :id';
         $stmt = $this->conexao->prepare($query);
         $stmt->bindValue(':id', $this->tarefa-> __get('id'));
+        $stmt->execute();
+    }
+
+    public function marcarRealizada(){
+        # 
+        $query = "update tb_tarefa set id_status = ? where id = ?";
+        $stmt = $this->conexao->prepare($query);
+        $stmt->bindValue(1, $this->tarefa->__get('id_status'));
+        $stmt->bindValue(2, $this->tarefa->__get('id'));
+        return $stmt->execute();  
+    }
+
+    public function recuperarTarefasPendentes(){
+        $query = 'select t.id, s.status, t.tarefa
+        from
+            tb_tarefas as t
+            left join tb_status as s on (t.id_status = s.id)
+            where
+                t.id_status = :id_status
+        ';
+        $stmt = $this->conexao->prepare($query);
+        $stmt->bindValue(':id_status', $this->tarefa->__get('id_status'));
+        $stmt->execute();
+        // Linha abaixo apenas vale para comandos SELECT;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
