@@ -1,8 +1,8 @@
 <?php
 
-require_once "tarefa.model.php";
-require_once "tarefa.service.php";
-require_once "conexao.php";
+require ($_SERVER["DOCUMENT_ROOT"] . '/PHP-PDO/src/models/tarefa.model.php');
+require ($_SERVER["DOCUMENT_ROOT"] . '/PHP-PDO/src/models/conexao.php') ;
+require ($_SERVER["DOCUMENT_ROOT"] . '/PHP-PDO/src/service/tarefa.service.php');
 
 $acao = isset($_GET["acao"]) ? $_GET["acao"] : $acao;
 

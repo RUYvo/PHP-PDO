@@ -5,8 +5,8 @@ class TarefaService{
     private $tarefa;
 
     public function __construct(Conexao $conexao, Tarefa $tarefa){
-        $this->$conexao = $conexao->conectar();
-        $this->$tarefa = $tarefa;
+        $this->conexao = $conexao->conectar();
+        $this->tarefa = $tarefa;
     }
 
     public function inserir(){
@@ -23,7 +23,7 @@ class TarefaService{
             select 
                 t.id, s.status, t.tarefa
             from
-                tb_tarefa as t
+                tb_tarefas as t
                 left join tb_status as s on (t.id_status = s.id) 
         ';
 
